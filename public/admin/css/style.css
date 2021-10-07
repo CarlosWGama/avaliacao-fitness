@@ -14345,3 +14345,24 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
 		box-shadow: 0 0 0 0 rgba(4, 169, 245, 0)
 	}
 }
+
+
+.avatar-large {
+	width: 240px;
+	border-radius: 15px;
+}
+
+.avatar-normal {
+	width: 120px;
+	border-radius: 15px;
+}
+
+.avatar-small {
+	width: 80px;
+	border-radius: 10px;
+}
+
+.avatar-tiny {
+	width: 40px;
+	border-radius: 5px;
+}

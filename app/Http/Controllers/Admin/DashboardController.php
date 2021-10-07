@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Aluno;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 
@@ -17,7 +18,7 @@ class DashboardController extends AdminController {
     /** Tela Inicial do Dashboard */
     public function index() {
         $this->dados['usuarios'] = Usuario::count();
-        $this->dados['alunos'] = 0;
+        $this->dados['alunos'] = Aluno::count();
         $this->dados['treinos'] = 0;
         $this->dados['anamneses'] = 0;
         return view('admin.dashboard.index', $this->dados);

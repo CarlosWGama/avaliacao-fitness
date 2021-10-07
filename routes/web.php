@@ -39,28 +39,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     });
 
 
-    //Vídeos
-    Route::prefix('videos')->group(function () {
-        Route::get('/', 'Admin\GaleriaVideosController@index')->name('admin.videos.listar');
-        Route::get('/novo', 'Admin\GaleriaVideosController@novo')->name('admin.videos.novo');
-        Route::post('/cadastrar', 'Admin\GaleriaVideosController@cadastrar')->name('admin.videos.cadastrar');
-        Route::get('/edicao/{id}', 'Admin\GaleriaVideosController@edicao')->name('admin.videos.edicao');
-        Route::post('/editar/{id}', 'Admin\GaleriaVideosController@editar')->name('admin.videos.editar');
-        Route::get('/excluir/{id?}', 'Admin\GaleriaVideosController@excluir')->name('admin.videos.excluir');
-        Route::get('/remove-capa/{id}', 'Admin\GaleriaVideosController@removerCapa')->name('admin.videos.remover-capa');
-
-    });
-
-    //Imagens
-    Route::prefix('imagens')->group(function () {
-        Route::get('/', 'Admin\GaleriaImagensController@index')->name('admin.imagens.listar');
-        Route::get('/nova', 'Admin\GaleriaImagensController@nova')->name('admin.imagens.nova');
-        Route::post('/cadastrar', 'Admin\GaleriaImagensController@cadastrar')->name('admin.imagens.cadastrar');
-        Route::get('/edicao/{id}', 'Admin\GaleriaImagensController@edicao')->name('admin.imagens.edicao');
-        Route::post('/editar/{id}', 'Admin\GaleriaImagensController@editar')->name('admin.imagens.editar');
-        Route::get('/excluir/{id?}', 'Admin\GaleriaImagensController@excluir')->name('admin.imagens.excluir');
-        Route::post('/adicionar-imagem/{galeriaID}', 'Admin\GaleriaImagensController@adicionarImagem')->name('admin.imagens.adicionar-imagem');
-        Route::get('/remover-imagem/{galeriaID}/{id?}', 'Admin\GaleriaImagensController@removerImagem')->name('admin.imagens.remover-imagem');
-        Route::get('/selecionar-capa/{galeriaID}/{imagemID?}', 'Admin\GaleriaImagensController@selecionarCapa')->name('admin.imagens.selecionar-capa');
+    // USUARIOS
+    Route::group(['prefix' => 'alunos'], function () {
+        Route::get('/', 'Admin\AlunosController@listar')->name('admin.alunos.listar');
+        Route::get('/novo', 'Admin\AlunosController@novo')->name('admin.alunos.novo');
+        Route::post('/cadastrar', 'Admin\AlunosController@cadastrar')->name('admin.alunos.cadastrar');
+        Route::get('/edicao/{id}', 'Admin\AlunosController@edicao')->name('admin.alunos.edicao');
+        Route::post('/editar/{id}', 'Admin\AlunosController@editar')->name('admin.alunos.editar');
+        Route::get('/excluir/{id?}', 'Admin\AlunosController@excluir')->name('admin.alunos.excluir');
+        Route::get('/visualizar/{id?}', 'Admin\AlunosController@visualizar')->name('admin.alunos.visualizar');
     });
 });
