@@ -1,0 +1,30 @@
+.progress-circle {
+    position:relative;
+    margin:80px;
+    width:100px; height:100px;
+}
+.pc-canvas {
+    display: block;
+    position:absolute;
+    top:0;
+    left:0;
+}
+.pc-span {
+    color:#555;
+    display:block;
+    line-height:100px;
+    text-align:center;
+    width:100px;
+    font-family:sans-serif;
+    font-size:20px;
+    font-weight:100;
+    margin-left:5px;
+}
+/* 
+input {
+    width: 200px;
+}
+
+span {
+  
+} */
