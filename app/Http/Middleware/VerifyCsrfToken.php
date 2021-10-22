@@ -12,7 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'admin/tinymce/upload',
-        'admin/turismo/imagens/adicionar-imagem/{galeriaID}'
+        'tinymce/upload',
     ];
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Usuario;
+use App\Models\Instrutor;
 use Illuminate\Database\Seeder;
 
 class UsuarioSeeder extends Seeder
@@ -14,6 +14,6 @@ class UsuarioSeeder extends Seeder
      */
     public function run() {
         //
-        Usuario::create(['nome' => 'Admin', 'email' => 'admin@admin.com', 'senha' => bcrypt('123456')]);
+        Instrutor::create(['nome' => 'Admin', 'email' => 'admin@admin.com', 'senha' => bcrypt('123456')]);
     }
 }

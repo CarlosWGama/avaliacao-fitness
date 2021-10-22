@@ -13,40 +13,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //============================ ADMIN ======================================//
-Route::get('/', 'Admin\LoginController@index');
-Route::get('/login', 'Admin\LoginController@index')->name('login');
-Route::post('/logar', 'Admin\LoginController@logar')->name('logar');
-Route::get('/logout', 'Admin\LoginController@logout')->name('logout');
-Route::get('/recuperar-senha', 'Admin\LoginController@recuperarSenha')->name('senha.recuperar');
-Route::post('/solicitar-nova-senha', 'Admin\LoginController@solicitarNovaSenha')->name('senha.solicitar');
-Route::get('/nova-senha', 'Admin\LoginController@novaSenha')->name('senha.nova');
-Route::post('/nova-senha', 'Admin\LoginController@salvarNovaSenha')->name('senha.salvar');
+Route::get('/', 'LoginController@index');
+Route::get('/login', 'LoginController@index')->name('login');
+Route::post('/logar', 'LoginController@logar')->name('logar');
+Route::get('/logout', 'LoginController@logout')->name('logout');
+Route::get('/recuperar-senha', 'LoginController@recuperarSenha')->name('senha.recuperar');
+Route::post('/solicitar-nova-senha', 'LoginController@solicitarNovaSenha')->name('senha.solicitar');
+Route::get('/nova-senha', 'LoginController@novaSenha')->name('senha.nova');
+Route::post('/nova-senha', 'LoginController@salvarNovaSenha')->name('senha.salvar');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+Route::post('/tinymce/upload', 'TinyMCEController@upload')->name('admin.tinymce.upload');
 
-    Route::post('/tinymce/upload', 'Admin\TinyMCEController@upload')->name('admin.tinymce.upload');
 
-    Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
+Route::group(['prefix' => 'instrutor', 'middleware' => 'instrutor'], function () {
+    
 
-    // USUARIOS
-    Route::group(['prefix' => 'usuarios'], function () {
-        Route::get('/', 'Admin\UsuariosController@index')->name('admin.usuarios.listar');
-        Route::get('/novo', 'Admin\UsuariosController@novo')->name('admin.usuarios.novo');
-        Route::post('/cadastrar', 'Admin\UsuariosController@cadastrar')->name('admin.usuarios.cadastrar');
-        Route::get('/edicao/{id}', 'Admin\UsuariosController@edicao')->name('admin.usuarios.edicao');
-        Route::post('/editar/{id}', 'Admin\UsuariosController@editar')->name('admin.usuarios.editar');
-        Route::get('/excluir/{id?}', 'Admin\UsuariosController@excluir')->name('admin.usuarios.excluir');
+    Route::get('/dashboard', 'Instrutor\DashboardController@index')->name('instrutor.dashboard');
+
+    // Instrutores
+    Route::group(['prefix' => 'instrutores'], function () {
+        Route::get('/', 'Instrutor\InstrutoresController@index')->name('instrutor.instrutores.listar');
+        Route::get('/novo', 'Instrutor\InstrutoresController@novo')->name('instrutor.instrutores.novo');
+        Route::post('/cadastrar', 'Instrutor\InstrutoresController@cadastrar')->name('instrutor.instrutores.cadastrar');
+        Route::get('/edicao/{id}', 'Instrutor\InstrutoresController@edicao')->name('instrutor.instrutores.edicao');
+        Route::post('/editar/{id}', 'Instrutor\InstrutoresController@editar')->name('instrutor.instrutores.editar');
+        Route::get('/excluir/{id?}', 'Instrutor\InstrutoresController@excluir')->name('instrutor.instrutores.excluir');
     });
 
 
-    // USUARIOS
+    // Alunos
     Route::group(['prefix' => 'alunos'], function () {
-        Route::get('/', 'Admin\AlunosController@listar')->name('admin.alunos.listar');
-        Route::get('/novo', 'Admin\AlunosController@novo')->name('admin.alunos.novo');
-        Route::post('/cadastrar', 'Admin\AlunosController@cadastrar')->name('admin.alunos.cadastrar');
-        Route::get('/edicao/{id}', 'Admin\AlunosController@edicao')->name('admin.alunos.edicao');
-        Route::post('/editar/{id}', 'Admin\AlunosController@editar')->name('admin.alunos.editar');
-        Route::get('/excluir/{id?}', 'Admin\AlunosController@excluir')->name('admin.alunos.excluir');
-        Route::get('/visualizar/{id?}', 'Admin\AlunosController@visualizar')->name('admin.alunos.visualizar');
+        Route::get('/', 'Instrutor\AlunosController@listar')->name('instrutor.alunos.listar');
+        Route::get('/novo', 'Instrutor\AlunosController@novo')->name('instrutor.alunos.novo');
+        Route::post('/cadastrar', 'Instrutor\AlunosController@cadastrar')->name('instrutor.alunos.cadastrar');
+        Route::get('/edicao/{id}', 'Instrutor\AlunosController@edicao')->name('instrutor.alunos.edicao');
+        Route::post('/editar/{id}', 'Instrutor\AlunosController@editar')->name('instrutor.alunos.editar');
+        Route::get('/excluir/{id?}', 'Instrutor\AlunosController@excluir')->name('instrutor.alunos.excluir');
+        Route::get('/visualizar/{id?}', 'Instrutor\AlunosController@visualizar')->name('instrutor.alunos.visualizar');
     });
 });
