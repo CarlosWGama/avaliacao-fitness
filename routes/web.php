@@ -50,5 +50,15 @@ Route::group(['prefix' => 'instrutor', 'middleware' => 'instrutor'], function ()
         Route::post('/editar/{id}', 'Instrutor\AlunosController@editar')->name('instrutor.alunos.editar');
         Route::get('/excluir/{id?}', 'Instrutor\AlunosController@excluir')->name('instrutor.alunos.excluir');
         Route::get('/visualizar/{id?}', 'Instrutor\AlunosController@visualizar')->name('instrutor.alunos.visualizar');
+
+
+        Route::prefix('anamnese')->group(function () {
+            Route::get('/nova/{alunoID}', 'Instrutor\AlunoAnamnesesController@nova')->name('instrutor.alunos.anamneses.nova');
+            Route::post('/cadastrar/{alunoID}', 'Instrutor\AlunoAnamnesesController@cadastrar')->name('instrutor.alunos.anamneses.cadastrar');
+            Route::get('/edicao/{id}', 'Instrutor\AlunoAnamnesesController@edicao')->name('instrutor.alunos.anamneses.edicao');
+            Route::post('/editar/{id}', 'Instrutor\AlunoAnamnesesController@editar')->name('instrutor.alunos.anamneses.editar');
+            Route::get('/excluir/{id?}', 'Instrutor\AlunoAnamnesesController@excluir')->name('instrutor.alunos.anamneses.excluir');
+            Route::get('/download/{id?}', 'Instrutor\AlunoAnamnesesController@download')->name('instrutor.alunos.anamneses.download');
+        });
     });
 });

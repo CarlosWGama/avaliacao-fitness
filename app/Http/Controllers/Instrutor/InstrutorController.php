@@ -12,10 +12,15 @@ use App\Models\Instrutor;
 class InstrutorController extends Controller {
     protected $dados = [
         'menu'      => '',
-        'tinyMCE'   => false
+        'tinyMCE'   => false,
+        'formSteps'   => false,
     ];
 
     protected function tinyMCE() {
         $this->dados['tinyMCE'] = true;
+    }
+
+    protected function formSteps() {
+        $this->dados['formSteps'] = true;
     }
 }

@@ -366,6 +366,32 @@
     @endif
 
     @stack('javascript')
+
+
+    @if($formSteps)
+    <script src="{{asset('admin/js/jquery-steps/jquery.steps.min.js')}}" referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="{{asset('admin/js/jquery-steps/jquery.steps.css')}}">
+    <script>
+        $(".form-steps").steps({
+            headerTag: "h3",
+            bodyTag: "section",
+            transitionEffect: "slideLeft",
+            labels: {
+                next: 'Próximo',
+                previous: 'Anterior',
+                loading: 'Carregando',
+                pagination: 'Paginação',
+                current: 'Atual step:',
+                cancel: 'Cancelar',
+                finish: 'Salvar',
+            },
+            enableFinishButton: false,
+
+            autoFocus: true
+        });
+    </script>
+    @endif
+
 </body>
 
 </html>

@@ -39,7 +39,7 @@
         </style>
     @endpush
 
-    <a href="javascript:;" class="btn btn-success">Nova Anamnese</a>
+    <a href="{{route('instrutor.alunos.anamneses.nova', ['alunoID' => $aluno->id])}}" class="btn btn-success">Nova Anamnese</a>
 
     @if(session('sucesso'))
     <div class="alert alert-success" role="alert" style="margin:0px 10px">

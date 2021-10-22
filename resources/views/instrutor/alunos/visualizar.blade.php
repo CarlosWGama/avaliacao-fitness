@@ -125,7 +125,7 @@
         </ul>
         
         <div style="padding:20px">
-            <div id="anamese" class="ficha">@include('instrutor.alunos._anamnese')</div>
+            <div id="anamese" class="ficha">@include('instrutor.alunos.anamneses.listar')</div>
             <div id="treino"  class="ficha" style="display:none;">@include('instrutor.alunos._treinos')</div>
         </div>
     </div>
