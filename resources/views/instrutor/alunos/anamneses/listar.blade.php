@@ -4,17 +4,24 @@
     <div id="geral-anamnese">
         <div class="geral-anamnese-col">
             <p class="campo-anamnese">Total Anamneses realizadas:</p>
-            <p class="info-anamnese">2</p>
+            <p class="info-anamnese">{{$anamnesesTotal}}</p>
         </div>
 
         <div class="geral-anamnese-col">
             {{-- ULTIMA --}}
             <p  class="campo-anamnese">Última Anamnese:</p>
-            <p class="info-anamnese">08/10/2021</p>
-
+            <p class="info-anamnese">
+                @if ($anamnesesTotal > 0)
+                {{date('d/m/Y', strtotime($anamnesesUltima->created_at))}}
+                @else
+                -----
+                @endif
+            </p>
+                
+                
             {{-- PRÓXIMA --}}
-            <p  class="campo-anamnese">Próxima Anamnese:</p>
-            <p class="info-anamnese">08/12/2021</p>
+            {{-- <p  class="campo-anamnese">Próxima Anamnese:</p>
+            <p class="info-anamnese">08/12/2021</p> --}}
         </div>
     </div>
 
@@ -41,34 +48,26 @@
 
     <a href="{{route('instrutor.alunos.anamneses.nova', ['alunoID' => $aluno->id])}}" class="btn btn-success">Nova Anamnese</a>
 
-    @if(session('sucesso'))
-    <div class="alert alert-success" role="alert" style="margin:0px 10px">
-        {{session('sucesso')}}
-    </div>
-    @endif
     <table class="table">
         <thead>
             <tr>
                 <td>ID</td>
-                <td>Data Atual</td>
-                <td style="width:60%">Data da Próxima</td>
+                <td width="60%">Data de realização</td>
                 <td>Opções</td>
             </tr>
         </thead>
         <tbody>
-            @foreach([(object)['id' => 1, 'data_atual' => '2021-08-08', 'data_proxima' => '2021-10-08'], (object)['id' => 2, 'data_atual' => '2021-10-08', 'data_proxima' => '2021-12-08']] as $anamnese)
+            @foreach($anamneses as $anamnese)
             <tr>
                 <!-- ID -->
                 <td><h6>{{$anamnese->id}}</h6></td>
                 <!-- DATA -->
-                <td><p>{{date('d/m/Y', strtotime($anamnese->data_atual))}}</p></td>
-                <!-- PRÒXIMA -->
-                <td><p>{{date('d/m/Y', strtotime($anamnese->data_proxima))}}</p></td>
+                <td><p>{{date('d/m/Y', strtotime($anamnese->created_at))}}</p></td>
               
                 <!-- OPÇÕES -->   
                 <td>
                     </a>
-                    <a href="javascript:;" title="Editar"alt="Editar" class="btn btn-sm btn-success">
+                    <a href="{{route('instrutor.alunos.anamneses.edicao', [$anamnese->id])}}" title="Editar"alt="Editar" class="btn btn-sm btn-success">
                     <i class="fa fa-edit"></i>
                     </a>
                     <span class="btn btn-sm btn-danger remover-modal-anamnese" title="Excluir" data-toggle="modal" data-target="#modal-anamnese" data-id="{{$anamnese->id}}"><i class="fa fa-trash"></i></span>
@@ -115,6 +114,6 @@
         anamneseID = $(this).data('id');
     })
 
-    // $('.btn-deletar').click(() => window.location.href="{{route('instrutor.alunos.excluir')}}/"+anamneseID);
+    $('.btn-deletar').click(() => window.location.href="{{route('instrutor.alunos.anamneses.excluir')}}/"+anamneseID);
 </script>
 @endpush

@@ -50,6 +50,12 @@
         <h5>Perfil de {{$aluno->nome}}</h5>
     </div>
 
+    @if(session('sucesso'))
+    <div class="alert alert-success" role="alert" style="margin:10px">
+        {{session('sucesso')}}
+    </div>
+    @endif
+
 
     <div id="ficha-aluno">
         <div id="avatar-campo">

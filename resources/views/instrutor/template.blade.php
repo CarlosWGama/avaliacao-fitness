@@ -376,6 +376,12 @@
             headerTag: "h3",
             bodyTag: "section",
             transitionEffect: "slideLeft",
+            enableAllSteps: true,
+            onStepChanged: function (event, currentIndex, priorIndex) {
+                console.log('aaa');
+                $('.content').scrollTop();
+            }, 
+
             labels: {
                 next: 'Próximo',
                 previous: 'Anterior',

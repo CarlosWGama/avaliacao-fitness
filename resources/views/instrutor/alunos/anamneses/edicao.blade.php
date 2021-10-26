@@ -1,6 +1,6 @@
 @extends('instrutor.template')
 
-@section('titulo', 'Nova Anamnese de ' . $aluno->nome)
+@section('titulo', 'Edição de Anamnese de ' . $anamnese->aluno->nome)
 
 @section('conteudo')
 
@@ -10,7 +10,7 @@
         <h5>Cadastro de Anamnese</h5>
     </div>
 
-    <form action="{{route('instrutor.alunos.anamneses.cadastrar', ['alunoID' => $aluno->id])}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('instrutor.alunos.anamneses.editar', ['id' => $anamnese->id])}}" method="post" enctype="multipart/form-data">
         @csrf
 
         
@@ -33,7 +33,7 @@
         
         <div class="card-footer">
             <button type="submit" class="btn btn-primary btn-sm">
-                <i class="fa fa-save"></i> Cadastrar
+                <i class="fa fa-save"></i> Editar
             </button>
         </div>
     </form>

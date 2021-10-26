@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Instrutor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aluno;
+use App\Models\AlunosAnamnese;
 use Illuminate\Http\Request;
 
 class AlunosController extends InstrutorController {
@@ -94,6 +95,9 @@ class AlunosController extends InstrutorController {
     //** Realiza a tela de visualização */
     public function visualizar(Request $request, int $id) {
         $this->dados['aluno'] = Aluno::findOrFail($id);
+        $this->dados['anamneses'] = AlunosAnamnese::where('aluno_id', $id)->paginate(10);
+        $this->dados['anamnesesTotal'] = AlunosAnamnese::where('aluno_id', $id)->count();
+        $this->dados['anamnesesUltima'] = AlunosAnamnese::where('aluno_id', $id)->orderBy('id', 'desc')->first();
         return view('instrutor.alunos.visualizar', $this->dados);
 
     }
