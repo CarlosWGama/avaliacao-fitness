@@ -66,10 +66,14 @@
               
                 <!-- OPÇÕES -->   
                 <td>
-                    </a>
+                   
                     <a href="{{route('instrutor.alunos.anamneses.edicao', [$anamnese->id])}}" title="Editar"alt="Editar" class="btn btn-sm btn-success">
-                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-edit"></i> </a>
+
+                    <a target="_blank" href="{{route('instrutor.alunos.anamneses.download', [$anamnese->id])}}" title="Download" alt="Download" class="btn btn-sm btn-primary">
+                    <i class="fa fa-download"></i>
                     </a>
+                   
                     <span class="btn btn-sm btn-danger remover-modal-anamnese" title="Excluir" data-toggle="modal" data-target="#modal-anamnese" data-id="{{$anamnese->id}}"><i class="fa fa-trash"></i></span>
                 </td>
             </tr>
@@ -78,7 +82,7 @@
     </table>
     
     <!-- Paginação -->
-    {{-- <div style="padding:10px">{{$alunos->links()}}</div> --}}
+    <div style="padding:10px">{{$anamneses->links()}}</div>
 </div>
 
 

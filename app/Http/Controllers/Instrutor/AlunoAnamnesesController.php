@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Instrutor;
 
 use App\Models\Aluno;
 use App\Models\AlunosAnamnese;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 
 class AlunoAnamnesesController extends InstrutorController {
@@ -77,5 +78,12 @@ class AlunoAnamnesesController extends InstrutorController {
         $anamnese = AlunosAnamnese::findOrFail($anamneseID);
         $anamnese->delete();
         return redirect()->route('instrutor.alunos.visualizar', [$anamnese->aluno_id])->with('sucesso', 'Anamnese removida com sucesso');
+    }
+
+    //** Realiza o download de um PDF */
+    public function download(int $anamneseID) {
+        $dados['anamnese'] = AlunosAnamnese::findOrFail($anamneseID);
+        //return view('instrutor.alunos.anamneses.pdf' , $dados);
+        return \PDF::loadView('instrutor.alunos.anamneses.pdf', $dados)->download("anamnese_$anamneseID.pdf");
     }
 }
