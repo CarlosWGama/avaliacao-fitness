@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Aluno;
 use App\Models\AlunosAnamnese;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AlunosController extends InstrutorController {
 
@@ -48,8 +49,9 @@ class AlunosController extends InstrutorController {
         $aluno = Aluno::create($dados);
 
         if ($request->hasFile('foto')) {
+            $uuid = Str::uuid();
             $extensao = $request->foto->extension();
-            $aluno->foto = $nomeArquivo = 'foto_'.$aluno->id.'.'.$extensao;
+            $aluno->foto = $nomeArquivo = 'foto_'.$aluno->id.'_'.$uuid.'.'.$extensao;
             $request->foto->storeAs('public/alunos', $nomeArquivo);
             $aluno->save();
         }
@@ -77,8 +79,9 @@ class AlunosController extends InstrutorController {
         $aluno->fill($dados);
 
         if ($request->hasFile('foto')) {
+            $uuid = Str::uuid();
             $extensao = $request->foto->extension();
-            $aluno->foto = $nomeArquivo = 'foto_'.$aluno->id.'.'.$extensao;
+            $aluno->foto = $nomeArquivo = 'foto_'.$aluno->id.'_'.$uuid.'.'.$extensao;
             $request->foto->storeAs('public/alunos', $nomeArquivo);
         }
         $aluno->save();
