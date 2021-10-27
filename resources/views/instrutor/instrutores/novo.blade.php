@@ -10,7 +10,7 @@
         <h5>Cadastro de Usuário</h5>
     </div>
 
-    <form action="{{route('instrutor.instrutores.cadastrar')}}" method="post">
+    <form action="{{route('instrutor.instrutores.cadastrar')}}" method="post" enctype="multipart/form-data">
         
         <div class="card-body card-block">
             <!-- FORMULARIO -->

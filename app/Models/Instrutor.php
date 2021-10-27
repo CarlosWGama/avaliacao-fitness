@@ -17,4 +17,12 @@ class Instrutor extends Model {
     //Não exibe esses campos
     protected $hidden = ['senha', 'created_at', 'updated_at', 'deleted_at'];
 
+     /**
+     * Caso existe foto, retorna a url completa da thumbnail
+     *  */  
+    public function getCrefUrlAttribute() {
+        if (!$this->cref) return null;
+            return asset('storage/cref/'.$this->cref);
+    }
+
 }

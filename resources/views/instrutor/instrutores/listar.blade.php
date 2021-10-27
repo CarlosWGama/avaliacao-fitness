@@ -48,7 +48,8 @@
                 <thead>
                     <tr>
                         <td>ID</td>
-                        <td style="width:70%">Nome</td>
+                        <td style="width:60%">Nome</td>
+                        <td>CREF</td>
                         <td>Opções</td>
                     </tr>
                 </thead>
@@ -65,6 +66,14 @@
                                     <a href="#">{{$instrutor->email}}</a>
                                 </span>
                             </div>
+                        </td>
+                        <!-- CREF -->
+                        <td>
+                            @if($instrutor->cref_url)
+                            <a href="{{$instrutor->cref_url}}" target="_blank" title="Editar" class="btn btn-sm btn-primary">
+                                <i class="fa fa-address-card"></i>
+                            </a>
+                            @endif
                         </td>
                         <!-- OPÇÕES -->   
                         <td>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Instrutor;
 use App\Rules\Cpf;
+use Illuminate\Support\Str;
 
 /**
  * Controller responsável pela manipulação dos dados do usuários 
@@ -44,12 +45,21 @@ class InstrutoresController extends InstrutorController {
     public function cadastrar(Request $request) {
         $request->validate([
             'nome'  => 'required',
-            'senha'  => 'required|min:6',
+            'senha' => 'required|min:6',
             'email' => 'required|email|unique:instrutores,email',
+            'cref'  => 'required|file'
         ]);
         $dados = $request->all();
         $dados['senha'] = bcrypt($dados['senha']);
-        Instrutor::create($dados);
+        $instrutor = Instrutor::create($dados);
+
+        if ($request->hasFile('cref')) {
+            $uuid = Str::uuid();
+            $extensao = $request->cref->extension();
+            $instrutor->cref = $nomeArquivo = 'cref_'.$instrutor->id.'_' . $uuid . '.'.$extensao;
+            $request->cref->storeAs('public/cref', $nomeArquivo);
+            $instrutor->save();
+        }
 
         return redirect()->route('instrutor.instrutores.listar')->with(['sucesso' => 'Instrutor cadastrado com sucesso']);
     }
@@ -67,16 +77,25 @@ class InstrutoresController extends InstrutorController {
      * @param $id id do usuário
      */
     public function editar(Request $request, int $id) {
+        $instrutor = Instrutor::findOrFail($id);
         $request->validate([
             'nome'  => 'required',
-            'email' => 'required|email|unique:instrutor,email,'.$id,
+            'email' => 'required|email|unique:instrutores,email,'.$id,
         ]);
 
         $dados = $request->except(['_token']);
         if (!empty($dados['senha']))
             $dados['senha'] = bcrypt($dados['senha']);
         else unset($dados['senha']);
-        Instrutor::where('id', $id)->update($dados);
+        $instrutor->fill($dados);
+
+        if ($request->hasFile('cref')) {
+            $uuid = Str::uuid();
+            $extensao = $request->cref->extension();
+            $instrutor->cref = $nomeArquivo = 'cref_'.$instrutor->id.'_' . $uuid . '.'.$extensao;
+            $request->cref->storeAs('public/cref', $nomeArquivo);
+        }
+        $instrutor->save();
 
         return redirect()->route('instrutor.instrutores.listar')->with(['sucesso' => 'Instrutor editado com sucesso']);
     }

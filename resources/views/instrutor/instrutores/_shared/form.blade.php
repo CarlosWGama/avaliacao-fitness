@@ -46,6 +46,26 @@
     </div>
 </div> --}}
 
+<!-- CREF -->
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">CREF</label>
+    <div class="col-sm-10">
+        <input type="file" name="cref" accept=".gif,.jpg,.jpeg,.png,.pdf" />
+    </div>
+</div>
+
+ <!-- CREF -->
+ @if($instrutor->cref_url)
+ <div class="form-group row">
+     <label class="col-sm-2 col-form-label">
+        <label class="col-sm-2 col-form-label"></label>
+     </label>
+     <div class="col-sm-10">
+         <a href="{{$instrutor->cref_url}}" target="_blank">Visualizar CREF</a>
+     </div>
+ </div>
+ @endif
+
 @push("javascript")
     <script type="text/javascript" src="{{asset('admin/js/mask/jquery.mask.min.js')}}"></script>
 

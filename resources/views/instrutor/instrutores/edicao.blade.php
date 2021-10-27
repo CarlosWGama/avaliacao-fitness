@@ -10,7 +10,7 @@
         <h5>Edição</h5>
     </div>
 
-    <form action="{{route('instrutor.instrutores.editar', ['id' => $instrutor->id])}}" method="post" class="form-material">
+    <form action="{{route('instrutor.instrutores.editar', ['id' => $instrutor->id])}}" method="post" class="form-material"  enctype="multipart/form-data">
         
         <div class="card-body card-block">
             <!-- FORMULARIO -->
